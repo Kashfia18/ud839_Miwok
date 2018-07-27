@@ -15,11 +15,13 @@
  */
 package com.example.android.miwok;
 
+        import android.annotation.TargetApi;
         import android.content.Context;
         import android.media.AudioAttributes;
         import android.media.AudioFocusRequest;
         import android.media.AudioManager;
         import android.media.MediaPlayer;
+        import android.os.Build;
         import android.support.v7.app.AppCompatActivity;
         import android.os.Bundle;
         import android.util.Log;
@@ -116,6 +118,7 @@ public class NumbersActivity extends AppCompatActivity {
         listView.setAdapter(adapter);
 
         listView.setOnItemClickListener(new ListView.OnItemClickListener(){
+            @TargetApi(Build.VERSION_CODES.O)
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
@@ -125,15 +128,15 @@ public class NumbersActivity extends AppCompatActivity {
                 AudioAttributes mAudioAttributes =
                         new AudioAttributes.Builder()
                                 .setUsage(AudioAttributes.USAGE_MEDIA)
-                                .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
+                                .setContentType(AudioAttributes.CONTENT_TYPE_SPEECH)
                                 .build();
                 AudioFocusRequest mAudioFocusRequest =
-                        new AudioFocusRequest.Builder(AudioManager.AUDIOFOCUS_GAIN)
+                        new AudioFocusRequest.Builder(AudioManager.AUDIOFOCUS_GAIN_TRANSIENT)
                                 .setAudioAttributes(mAudioAttributes)
                                 .setAcceptsDelayedFocusGain(true)
                                 .setOnAudioFocusChangeListener(mOnAudioFocusChangeListener) // Need to implement listener
                                 .build();
-
+                mMediaPlayer.setAudioAttributes(mAudioAttributes);
                 int focusRequest = mAudioManager.requestAudioFocus(mAudioFocusRequest);
                 switch (focusRequest) {
                     case AudioManager.AUDIOFOCUS_REQUEST_FAILED:
