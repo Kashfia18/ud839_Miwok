@@ -40,7 +40,6 @@ public class NumbersActivity extends AppCompatActivity {
     private  AudioManager mAudioManager;
 
 
-
     private AudioManager.OnAudioFocusChangeListener mOnAudioFocusChangeListener = new AudioManager.OnAudioFocusChangeListener() {
         @Override
         public void onAudioFocusChange(int focusChange) {
@@ -141,7 +140,6 @@ public class NumbersActivity extends AppCompatActivity {
                                 .setAcceptsDelayedFocusGain(true)
                                 .setOnAudioFocusChangeListener(mOnAudioFocusChangeListener) // Need to implement listener
                                 .build();
-               mMediaPlayer.setAudioAttributes(mAudioAttributes);
                 int focusRequest = mAudioManager.requestAudioFocus(mAudioFocusRequest);
                 switch (focusRequest) {
                     case AudioManager.AUDIOFOCUS_REQUEST_FAILED:
@@ -153,7 +151,6 @@ public class NumbersActivity extends AppCompatActivity {
                         mMediaPlayer.start();
 
                         mMediaPlayer.setOnCompletionListener(mCompletionListener);
-
 
                 }
             }
@@ -180,7 +177,7 @@ public class NumbersActivity extends AppCompatActivity {
 
             // Regardless of whether or not we were granted audio focus, abandon it. This also
             // unregisters the AudioFocusChangeListener so we don't get anymore callbacks.
-//            mAudioManager.abandonAudioFocusRequest (mAudioFocusRequest);
+//          mAudioManager.abandonAudioFocusRequest (mAudioFocusRequest);
     }
 }
 
