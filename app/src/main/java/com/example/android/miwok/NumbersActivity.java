@@ -32,12 +32,15 @@ package com.example.android.miwok;
 
         import java.util.ArrayList;
 
+@TargetApi(Build.VERSION_CODES.O)
 public class NumbersActivity extends AppCompatActivity {
 
     private MediaPlayer mMediaPlayer;
 
-    private
-    AudioManager mAudioManager;
+    private  AudioManager mAudioManager;
+
+
+
     private AudioManager.OnAudioFocusChangeListener mOnAudioFocusChangeListener = new AudioManager.OnAudioFocusChangeListener() {
         @Override
         public void onAudioFocusChange(int focusChange) {
@@ -62,6 +65,8 @@ public class NumbersActivity extends AppCompatActivity {
             }
         }
     };
+
+
 
     private MediaPlayer.OnCompletionListener mCompletionListener=new MediaPlayer.OnCompletionListener() {
         @Override
@@ -136,7 +141,7 @@ public class NumbersActivity extends AppCompatActivity {
                                 .setAcceptsDelayedFocusGain(true)
                                 .setOnAudioFocusChangeListener(mOnAudioFocusChangeListener) // Need to implement listener
                                 .build();
-                mMediaPlayer.setAudioAttributes(mAudioAttributes);
+               mMediaPlayer.setAudioAttributes(mAudioAttributes);
                 int focusRequest = mAudioManager.requestAudioFocus(mAudioFocusRequest);
                 switch (focusRequest) {
                     case AudioManager.AUDIOFOCUS_REQUEST_FAILED:
@@ -149,6 +154,7 @@ public class NumbersActivity extends AppCompatActivity {
 
                         mMediaPlayer.setOnCompletionListener(mCompletionListener);
 
+
                 }
             }
         });
@@ -156,25 +162,6 @@ public class NumbersActivity extends AppCompatActivity {
 
     }
 
-//
-//    /**
-//     * Clean up the media player by releasing its resources.
-//     */
-//    private void releaseMediaPlayer(){
-//        // If the media player is not null, then it may be currently playing a sound.
-//        if (mMediaPlayer != null) {
-//            // Regardless of the current state of the media player, release its resources
-//            // because we no longer need it.
-//            mMediaPlayer.release();
-//
-//            // Set the media player back to null. For our code, we've decided that
-//            // setting the media player to null is an easy way to tell that the media player
-//            // is not configured to play an audio file at the moment.
-//            mMediaPlayer = null;
-//        }
-//    }
-//
-//}
 
     /**
      * Clean up the media player by releasing its resources.
@@ -193,8 +180,9 @@ public class NumbersActivity extends AppCompatActivity {
 
             // Regardless of whether or not we were granted audio focus, abandon it. This also
             // unregisters the AudioFocusChangeListener so we don't get anymore callbacks.
-            mAudioManager.abandonAudioFocus(mOnAudioFocusChangeListener);
-        }
+//            mAudioManager.abandonAudioFocusRequest (mAudioFocusRequest);
     }
+}
+
 }
 
