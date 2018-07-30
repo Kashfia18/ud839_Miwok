@@ -151,7 +151,7 @@ public class NumbersActivity extends AppCompatActivity {
                         mMediaPlayer.start();
 
                         mMediaPlayer.setOnCompletionListener(mCompletionListener);
-
+                        mAudioManager.abandonAudioFocusRequest (mAudioFocusRequest);
                 }
             }
         });
@@ -177,7 +177,7 @@ public class NumbersActivity extends AppCompatActivity {
 
             // Regardless of whether or not we were granted audio focus, abandon it. This also
             // unregisters the AudioFocusChangeListener so we don't get anymore callbacks.
-//          mAudioManager.abandonAudioFocusRequest (mAudioFocusRequest);
+//          mAudioManager.abandonAudioFocusRequest (mAudioFocusRequest);??????????????
     }
 }
 
